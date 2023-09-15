@@ -1,0 +1,12 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="LGPL-v3"
+
+[[mods]]
+modId="isdpe"
+version="${file.jarVersion}"
+displayName="InitialSpawnDimensionPotatoEdition"
+authors="TeamPotato"
+description='''
+A Minecraft mod.
+'''

@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+
+version = mod_version
+group = 'com.teampotato.isdpe'
+archivesBaseName = 'isdpe'
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+
+minecraft {
+    mappings channel: 'parchment', version: '2022.03.06-1.16.5'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'info'
+
+            mods {
+                isdpe {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'info'
+
+            mods {
+                isdpe {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'isdpe', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                isdpe {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    implementation 'org.jetbrains:annotations:24.0.0'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
+}
+
+jar {
+    manifest {
+        attributes([
+            "Implementation-Title": project.name,
+            "Implementation-Version": mod_version,
+            "Implementation-Vendor" :"teampotato",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar') 
