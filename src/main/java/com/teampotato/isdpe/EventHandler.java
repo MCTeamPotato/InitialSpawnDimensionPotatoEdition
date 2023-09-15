@@ -18,6 +18,7 @@ import static com.teampotato.isdpe.InitialSpawnDimensionPotatoEdition.*;
 public class EventHandler {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.@NotNull PlayerLoggedInEvent event) {
+        if (spawnDimension.get().equals("minecraft:overworld")) return;
         BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(spawnX.get(), spawnY.get(), spawnZ.get());
         PlayerEntity player = event.getPlayer();
         World world = player.level;
