@@ -26,7 +26,7 @@ public class EventHandler {
             MinecraftServer server = ((ServerWorld)world).getServer();
             ServerWorld destination = server.getLevel(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(spawnDimension.get())));
             if (destination == null) return;
-            server.getCommands().performCommand(server.createCommandSourceStack().withSuppressedOutput(), "/execute in " + spawnDimension.get() + " run tp " + player.getStringUUID() + " " + spawnX.get().floatValue() + " " + spawnY .get().floatValue() + " " + spawnZ.get().floatValue());
+            server.getCommands().performCommand(server.createCommandSourceStack().withSuppressedOutput(), "/execute in " + spawnDimension.get() + " run tp " + player.getStringUUID() + " " + spawnX.get().floatValue() + " " + spawnY.get().floatValue() + " " + spawnZ.get().floatValue());
             if (allowSpawnUnderground.get()) {
                 for (int i = spawnY.get(); i < 256; i ++) {
                     if (destination.getBlockState(mutableBlockPos).is(Blocks.AIR)) {
