@@ -38,7 +38,6 @@ public class EventHandler {
                 mutable.setY(i);
                 BlockState below = destination.getBlockState(mutable.below());
                 if (destination.getBlockState(mutable).is(Blocks.AIR) && destination.getBlockState(mutable.above()).is(Blocks.AIR) && !below.is(Blocks.AIR)) {
-                    if (i > 100 && (below.is(BlockTags.LOGS) || below.is(BlockTags.LEAVES))) continue;
                     commands.performCommand(commandSource, "/execute in " + spawnDim + " run tp " + uuid + " " + x + " " + i + " " + z);
                     player.addTag("isdpe.spawned");
                     safe = true;
